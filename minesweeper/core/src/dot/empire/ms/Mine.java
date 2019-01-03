@@ -1,0 +1,95 @@
+package dot.empire.ms;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.kotcrab.vis.ui.util.TableUtils;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.widget.VisDialog;
+import com.kotcrab.vis.ui.widget.VisImageButton;
+
+import java.awt.*;
+
+/**
+ *
+ */
+public class Mine extends VisImageButton {
+
+    private Minesweeper engine;
+    private ScreenGame parent;
+
+    private int xPos, yPos;
+    private boolean isMine;
+
+    public Mine(int xPos, int yPos, ScreenGame parent) {
+        // super(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("gfx/blank.png")))));
+        super(new SpriteDrawable(new Sprite(parent.getEngine().getAssetManager().get("gfx/blank.png", Texture.class))));
+        TableUtils.setSpacingDefaults(this); // Leaking
+
+        this.parent = parent;
+        this.engine = parent.getEngine();
+        this.isMine = false; // default to not a mine
+
+        this.xPos = xPos;
+        this.yPos = yPos;
+
+        super.addListener(new ClickEvent());
+    }
+
+    /**
+     * BANG!
+     */
+    private void bang() {
+        Toolkit.getDefaultToolkit().beep();
+        VisDialog dialogue = Dialogs.showOKDialog(getStage(), "BANG!", "Game Over");
+        Gdx.app.log(Minesweeper.TAG, "GAME OVER!");
+        this.changeImage("gfx/unlit-bomb.png");
+    }
+
+    public void setAdj(int num) {
+        this.changeImage(String.format("gfx/img_num_%d.png", num));
+    }
+
+    public boolean isMine() {
+        return this.isMine;
+    }
+
+    public void setMine(boolean isMine) {
+        this.isMine = isMine;
+    }
+
+    // https://badlogicgames.com/forum/viewtopic.php?f=11&t=11245#
+    private void changeImage(String img) {
+        VisImageButtonStyle style = getStyle();
+        style.checked = new SpriteDrawable(new Sprite(engine.getAssetManager().get(img, Texture.class)));
+        super.setStyle(style);
+        super.setChecked(true);
+        super.clearListeners();
+        // TableUtils.setSpacingDefaults(this);
+    }
+
+    /**
+     *
+     */
+    private class ClickEvent extends ChangeListener {
+
+        /**
+         * @param evt   Click event
+         * @param actor The event target, which is the actor that emitted the change event
+         */
+        @Override
+        public void changed(ChangeEvent evt, Actor actor) {
+            if (isChecked()) {
+                return;
+            }
+            if (isMine) {
+                bang();
+            } else {
+                parent.getAdjMines(xPos, yPos);
+            }
+        }
+    }
+}

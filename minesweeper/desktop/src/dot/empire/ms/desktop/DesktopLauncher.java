@@ -4,8 +4,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dot.empire.ms.Minesweeper;
 
-import static dot.empire.ms.Defines.HEIGHT;
-import static dot.empire.ms.Defines.WIDTH;
+import static dot.empire.ms.Minesweeper.HEIGHT;
+import static dot.empire.ms.Minesweeper.WIDTH;
 
 public final class DesktopLauncher {
 
@@ -21,7 +21,7 @@ public final class DesktopLauncher {
 
         cfg.title = Minesweeper.TAG;
 
-        cfg.resizable = false;
+        cfg.resizable = true;
         cfg.samples = 8;
 
         cfg.width = WIDTH;

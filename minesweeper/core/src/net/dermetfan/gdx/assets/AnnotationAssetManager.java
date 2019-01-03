@@ -265,7 +265,7 @@ public class AnnotationAssetManager extends AssetManager {
 
     @Override
     public synchronized <T> T get(String fileName, Class<T> type) {
-        Gdx.app.debug(Minesweeper.TAG, String.format("Getting %s = %s", type.getSimpleName(), fileName));
+        // Gdx.app.debug(Minesweeper.TAG, String.format("Getting %s = %s", type.getSimpleName(), fileName));
         return super.get(fileName, type);
     }
 
