@@ -9,24 +9,24 @@ import static dot.empire.ms.Defines.WIDTH;
 
 public final class DesktopLauncher {
 
-	private DesktopLauncher() {
-	}
+    private DesktopLauncher() {
+    }
 
-	/**
-	 * @param args Arguments from the command line
-	 */
-	public static void main(String[] args) {
-		final LwjglApplicationConfiguration cfg
-				= new LwjglApplicationConfiguration();
+    /**
+     * @param args Arguments from the command line
+     */
+    public static void main(String[] args) {
+        final LwjglApplicationConfiguration cfg
+                = new LwjglApplicationConfiguration();
 
-		cfg.title = Minesweeper.TAG;
+        cfg.title = Minesweeper.TAG;
 
-		cfg.resizable = false;
-		cfg.samples = 8;
+        cfg.resizable = false;
+        cfg.samples = 8;
 
-		cfg.width = WIDTH;
-		cfg.height = HEIGHT;
+        cfg.width = WIDTH;
+        cfg.height = HEIGHT;
 
-		new LwjglApplication(new Minesweeper(), cfg);
-	}
+        new LwjglApplication(new Minesweeper(), cfg);
+    }
 }
