@@ -14,7 +14,7 @@ import com.kotcrab.vis.ui.widget.VisImageButton;
 import java.awt.*;
 
 /**
- *
+ * Potential mine button.
  */
 public class Mine extends VisImageButton {
 
@@ -45,8 +45,20 @@ public class Mine extends VisImageButton {
     private void bang() {
         Toolkit.getDefaultToolkit().beep();
         VisDialog dialogue = Dialogs.showOKDialog(getStage(), "BANG!", "Game Over");
+        dialogue.setModal(true);
+
+        dialogue.addListener(new ChangeListener() {
+
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.clear();
+            }
+        });
+
         Gdx.app.log(Minesweeper.TAG, "GAME OVER!");
         this.changeImage("gfx/unlit-bomb.png");
+
+
     }
 
     public void setAdj(int num) {
@@ -72,7 +84,7 @@ public class Mine extends VisImageButton {
     }
 
     /**
-     *
+     * What to do when a button is clicked.
      */
     private class ClickEvent extends ChangeListener {
 
@@ -89,6 +101,7 @@ public class Mine extends VisImageButton {
                 bang();
             } else {
                 parent.getAdjMines(xPos, yPos);
+                parent.checkWin();
             }
         }
     }

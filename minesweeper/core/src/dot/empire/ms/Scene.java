@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.Disposable;
 
+/**
+ * Renderable game screen.
+ */
 public abstract class Scene extends ScreenAdapter implements Disposable {
 
     private Minesweeper engine;

@@ -3,17 +3,27 @@ package dot.empire.ms;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.widget.VisDialog;
 import com.kotcrab.vis.ui.widget.VisTable;
 
-import static dot.empire.ms.Minesweeper.NUM_MINES;
+import static dot.empire.ms.Minesweeper.*;
 
 /**
  * Playing field.
  */
 public class ScreenGame extends Scene {
 
+    /**
+     * Field size X-axis.
+     */
     private int x = 22;
+    /**
+     * Field size Y-axis.
+     */
     private int y = 23;
 
     private VisTable table;
@@ -54,7 +64,7 @@ public class ScreenGame extends Scene {
 //        this.field[0][0].setMine(true);
 
         int num = 0;
-        while (num != NUM_MINES) {
+        while (num != Math.min(NUM_MINES, WIDTH * HEIGHT)) { // cant have more mine than the size of the field
             int x = MathUtils.random(field.length - 1);
             int y = MathUtils.random(field[0].length - 1);
 
@@ -124,6 +134,29 @@ public class ScreenGame extends Scene {
     }
 
     public void clear() {
+        Gdx.app.debug(Minesweeper.TAG, "New game");
         getEngine().setScreen(new ScreenGame());
+    }
+
+    public void checkWin() {
+        int numChecked = 0;
+        for (int x = 0; x < field.length; x++) {
+            for (int y = 0; y < field[0].length; y++) {
+                numChecked += field[x][y].isChecked() ? 1 : 0;
+            }
+        }
+        Gdx.app.debug(TAG, String.format("check = %d, o = %d", numChecked, (x * y) - NUM_MINES));
+        if (numChecked >= (x * y) - NUM_MINES) {
+            VisDialog dialogue = Dialogs.showOKDialog(getEngine().getStage(), "Winner!", "You Win!");
+            dialogue.setModal(true);
+
+            dialogue.addListener(new ChangeListener() {
+
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    clear();
+                }
+            });
+        }
     }
 }

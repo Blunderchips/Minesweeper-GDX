@@ -48,6 +48,8 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 
+        // https://mvnrepository.com/artifact/com.ezware.oxbow/TaskDialog
+        compile group: 'com.ezware.oxbow', name: 'TaskDialog', version: '1.0.0'
     }
 }
 
