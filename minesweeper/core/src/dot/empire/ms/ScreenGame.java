@@ -13,7 +13,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import static dot.empire.ms.Minesweeper.*;
 
 /**
- * Playing field.
+ * Playing field. Main game screen.
  */
 public class ScreenGame extends Scene {
 
@@ -140,9 +140,9 @@ public class ScreenGame extends Scene {
 
     public void checkWin() {
         int numChecked = 0;
-        for (int x = 0; x < field.length; x++) {
+        for (Mine[] mines : field) {
             for (int y = 0; y < field[0].length; y++) {
-                numChecked += field[x][y].isChecked() ? 1 : 0;
+                numChecked += mines[y].isChecked() ? 1 : 0;
             }
         }
         Gdx.app.debug(TAG, String.format("check = %d, o = %d", numChecked, (x * y) - NUM_MINES));

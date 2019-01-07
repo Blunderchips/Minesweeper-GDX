@@ -31,9 +31,11 @@ public abstract class Scene extends ScreenAdapter implements Disposable {
     /**
      * @param dt Delta time
      */
+    @SuppressWarnings("EmptyMethod")
     public void update(float dt) {
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void render() {
     }
 

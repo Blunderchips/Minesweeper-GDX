@@ -1,6 +1,9 @@
 package dot.empire.ms;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,13 +14,19 @@ import net.dermetfan.gdx.assets.AnnotationAssetManager;
 import javax.swing.*;
 
 /**
- * Base Engine class.
+ * Base Engine class for Minesweeper-GDX.
  *
  * @author Matthew 'siD' Van der Bijl
  */
 public final class Minesweeper extends Game implements Disposable {
 
+    /**
+     * Width of the game window.
+     */
     public static final int WIDTH = 1024;
+    /**
+     * Height of the game window.
+     */
     public static final int HEIGHT = 960;
 
     /**
@@ -31,13 +40,18 @@ public final class Minesweeper extends Game implements Disposable {
     public static final String TAG = "Minesweeper-GDX";
 
     private AnnotationAssetManager assetMngr;
+    /**
+     * UI Layer.
+     */
     private Stage stage;
 
-
+    /**
+     * Called on start up.
+     */
     @Override
     public void create() {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        Gdx.gl.glClearColor(1, 1, 1, 1); // white
+        // Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
         VisUI.load();
         this.assetMngr = new AnnotationAssetManager();

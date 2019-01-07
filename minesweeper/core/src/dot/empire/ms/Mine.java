@@ -21,9 +21,21 @@ public class Mine extends VisImageButton {
     private Minesweeper engine;
     private ScreenGame parent;
 
-    private int xPos, yPos;
+    /**
+     * Position of the button on the X-axis.
+     */
+    private int xPos;
+    /**
+     * Position of the button on the Y-axis.
+     */
+    private int yPos;
     private boolean isMine;
 
+    /**
+     * @param xPos   X-axis position
+     * @param yPos   Y-axis position
+     * @param parent parent engine
+     */
     public Mine(int xPos, int yPos, ScreenGame parent) {
         // super(new SpriteDrawable(new Sprite(new Texture(Gdx.files.internal("gfx/blank.png")))));
         super(new SpriteDrawable(new Sprite(parent.getEngine().getAssetManager().get("gfx/blank.png", Texture.class))));
@@ -65,6 +77,9 @@ public class Mine extends VisImageButton {
         this.changeImage(String.format("gfx/img_num_%d.png", num));
     }
 
+    /**
+     * @return whether <code>this Button</code> is a mine or not
+     */
     public boolean isMine() {
         return this.isMine;
     }
@@ -86,7 +101,7 @@ public class Mine extends VisImageButton {
     /**
      * What to do when a button is clicked.
      */
-    private class ClickEvent extends ChangeListener {
+    private final class ClickEvent extends ChangeListener {
 
         /**
          * @param evt   Click event
