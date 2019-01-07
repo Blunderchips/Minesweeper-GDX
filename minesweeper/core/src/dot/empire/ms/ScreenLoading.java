@@ -31,9 +31,14 @@ public final class ScreenLoading extends Scene {
         getEngine().getStage().addActor(root);
     }
 
+    /**
+     * Called once per tick cycle to update the state of the screen.
+     *
+     * @param dt Delta time
+     */
     @Override
     public void update(float dt) {
-        final AssetManager mngr = getEngine().getAssetManager();
+        final AssetManager mngr = getEngine().getAssetManager(); // AnnotationAssetManager
         if (mngr.update()) {
             getEngine().setScreen(new ScreenGame());
         }
@@ -45,6 +50,7 @@ public final class ScreenLoading extends Scene {
     @Override
     public void hide() {
         this.lbl.remove();
+        this.root.remove();
         super.hide();
     }
 }
