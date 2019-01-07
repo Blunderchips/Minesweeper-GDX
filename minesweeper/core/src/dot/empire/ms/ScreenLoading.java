@@ -3,7 +3,9 @@ package dot.empire.ms;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisLabel;
+import com.kotcrab.vis.ui.widget.VisTable;
 
 /**
  * Load in all needed assets.
@@ -11,16 +13,22 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 public final class ScreenLoading extends Scene {
 
     private VisLabel lbl;
+    private VisTable root;
 
     public ScreenLoading() {
+        this.root = new VisTable(true);
+        this.root.setFillParent(true);
+        this.root.align(Align.center);
+
         this.lbl = new VisLabel();
         this.lbl.setColor(Color.BLACK);
     }
 
     @Override
     public void show() {
-        getEngine().getStage().addActor(lbl);
         super.show();
+        this.root.add(lbl);
+        getEngine().getStage().addActor(root);
     }
 
     @Override

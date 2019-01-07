@@ -37,7 +37,6 @@ public final class Minesweeper extends Game implements Disposable {
     @Override
     public void create() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.input.setInputProcessor(new InputMultiplexer());
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
         VisUI.load();
@@ -49,6 +48,7 @@ public final class Minesweeper extends Game implements Disposable {
             this.assetMngr.load("gfx/img_num_" + i + ".png", Texture.class);
         }
 
+        Gdx.input.setInputProcessor(new InputMultiplexer());
         this.stage = new Stage();
         getInputMultiplexer().addProcessor(stage);
 
