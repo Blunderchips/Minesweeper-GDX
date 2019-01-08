@@ -1,6 +1,7 @@
 # Minesweeper-GDX
 Minesweeper implemented in libGDX. Originally developed in the 1960’s I dare say that everyone has at least seen a version of Minesweeper in action if they have not played it themselves. I am using [libGDX](https://libgdx.badlogicgames.com/) and [VisUI](https://github.com/kotcrab/vis-ui).
 
+* [Making Minesweeper (libGDX)](https://youtu.be/d0cMCbGKIrI)
 * [GitHub - Blunderchips/Minesweeper-GDX](https://github.com/Blunderchips/Minesweeper-GDX)
 * [JavaDoc - https://blunderchips.github.io/Minesweeper-GDX/](https://blunderchips.github.io/Minesweeper-GDX/)
 
